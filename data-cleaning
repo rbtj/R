@@ -1,0 +1,71 @@
+#save.image("C:\\Users\\73901\\Desktop\\try3")
+#load("C:\\Users\\73901\\Desktop\\try3")
+#q()
+
+clr<-function(){cat("\014")}
+clr()
+ls()
+
+setwd('F:/R/Raghufiles_R')
+a<- read.csv("ksstage1.csv", header=TRUE, sep=",", dec=".", stringsAsFactors=FALSE)
+
+a<-data.frame(lapply(a,tolower))
+names(a)<-tolower(names(a))
+# head(a)
+# summary(a)
+
+#b<-a[sample(1:20000,1000),]
+clr()
+b<-a
+summary(b)
+colnames(b)
+b<-b[,c(7,14,16,17,18,20)]
+b<-data.frame(b,keep=rep(1,nrow(b)))
+dim(b)
+summary(b)
+
+#b$father_occupation[b$father_occupation=="not employed"]<-"unemployed"
+
+b$keep[
+
+    !b$school_location %in% c('rural','urbun') |
+    !b$cwsn  %in% c('no','yes') |
+    b$first_language %in% c('no') |
+    !b$second_langauge %in% c('english','kannada') |
+    !b$father_qualification %in% c('literate','illiterate') |
+    !b$mother_qualification %in% c('literate','illiterate')
+
+    ]<-0
+
+table(b$keep)
+b<-a[which(b$keep==1),]
+#b<-subset(b,b$keep==1)
+clr()
+dim(a)
+dim(b)
+summary(b)
+
+#install.packages("sqldf")
+#library(sqldf)
+#SQL query sql query
+
+b$total_correct<-as.numeric(as.character(b$total_correct))
+b$number_of_attended_days<-as.numeric(as.character(b$number_of_attended_days))
+b$per<-as.numeric(as.character(b$per))
+
+summary(b$total_correct)
+table(b$total_correct)
+max(b$total_correct)
+
+summary(b)
+
+colnames(b)
+dim(b)
+c<-sqldf("select * from b
+        where b.total_correct <= 160
+         ")
+dim(c)
+
+table(b$per)
+
+
