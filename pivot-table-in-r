@@ -1,0 +1,13 @@
+##
+## Special mention to github.com/ramnathv
+##
+
+install.packages(devtools)
+library(devtools)
+install_github("ramnathv/htmlwidgets") 
+install_github("smartinsightsfromdata/rpivotTable")
+library(rpivotTable)
+data(mtcars)
+mtcars
+rpivotTable(mtcars, rows="cyl", col="gear", aggregatorName="Count", 
+            vals="wt", rendererName="Table")
