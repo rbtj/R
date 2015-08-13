@@ -1,0 +1,26 @@
+x1<-sample(c(-100:100),5)
+x2<-sample(c(1:40),5)
+x3<-sample(c(-100:100),5)
+x4<-sample(c(11:420),5)
+y1<-cbind(x1,x2,x3)
+
+x2<-sample(c(37:39),3)
+x3<-sample(c(-1010:100),3)
+x4<-sample(c(11:420),3)
+#y2<-data.frame(x1,x2,x3)
+y2<-cbind(x1,x2,x4)
+y2<-y2[c(1,2),]
+
+y1
+y2
+
+#################### merge function
+
+merge(y1,y2) #automatically takes all headers
+merge(y1,y2, by="x1") #inner
+merge(y1,y2, by="x1",all=TRUE)
+merge(y1,y2, by="x1",all.y1=TRUE)
+merge(y1,y2, by="x1",all.y2=TRUE)
+merge(y1,y2, by=NULL)
+merge(y1,y2, by=c("x1","x2"))
+
