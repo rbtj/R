@@ -1,0 +1,48 @@
+clr<-function(){cat("\014")}
+readcsv<-function(a){
+  x1<- read.csv(a, header=TRUE, sep=",", dec=".", stringsAsFactors=FALSE)
+  x1<-data.frame(lapply(x1,tolower))
+  names(x1)<-tolower(names(x1))  
+  x1
+}
+clr()
+#### fucntions above this
+
+
+setwd('F:/R/Raghufiles_R/ks')
+s1<-readcsv("s1.csv")
+s21<-readcsv("s21.csv")
+s22<-readcsv("s22.csv")
+s23<-readcsv("s23.csv")
+s24<-readcsv("s24.csv")
+s25<-readcsv("s25.csv")
+s31<-readcsv("s31.csv")
+s32<-readcsv("s32.csv")
+s33<-readcsv("s33.csv")
+
+#Sys.time()-t1
+
+s1<-s1[-c(6:8,23,24)]
+s21<-s21[-c(6:8,24,25)]
+s24<-s24[-c(23,22)]
+
+s1<-data.frame(s1,stage=rep(1,nrow(s1)))
+s21<-data.frame(s21,stage=rep(2,nrow(s21)))
+
+s22<-data.frame(s22,stage=rep(2,nrow(s22)))
+s23<-data.frame(s23,stage=rep(2,nrow(s23)))
+s24<-data.frame(s24,stage=rep(2,nrow(s24)))
+s25<-data.frame(s25,stage=rep(2,nrow(s25)))
+
+s31<-data.frame(s31,stage=rep(3,nrow(s31)))
+s32<-data.frame(s32,stage=rep(3,nrow(s32)))
+s33<-data.frame(s33,stage=rep(3,nrow(s33)))
+
+clr()
+
+install.packages("plyr")
+library(plyr)
+
+a<-rbind.fill(s1,s21,s22,s23,s24,s25,s31,s32,s33)
+head(a)
+dim(a)
