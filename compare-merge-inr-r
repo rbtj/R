@@ -1,0 +1,40 @@
+N <- 1e3
+d1 <- data.frame(x=sample(N,N), y1=rnorm(N))
+d2 <- data.frame(x=sample(N,N), y2=rnorm(N))
+N
+summary(d1)
+summary(d2)
+
+round(cor(d1,d2),2)
+
+
+d <- merge(d1,d2)
+d
+# 7.6 sec
+
+library(plyr)
+d <- join(d1,d2)
+d
+# 2.9 sec
+
+library(data.table)
+dt1 <- data.table(d1, key="x")
+dt2 <- data.table(d2, key="x")
+d <- data.frame( dt1[dt2,list(x,y1,y2=dt2$y2)] )
+# 4.9 sec
+
+library(sqldf)
+sqldf()
+sqldf("create index ix1 on d1(x)")
+sqldf("create index ix2 on d2(x)")
+d <- sqldf("select * from d1 inner join d2 on d1.x=d2.x")
+sqldf()
+# 17.4 sec
+
+
+DF1 = data.frame(a = c(1, 1, 2, 2,2,2), b = 1:6)
+DF2 = data.frame(b = c(1, 2, 3, 3, 4), c = letters[1:5])
+DF1
+DF2
+merge(DF1, DF2)
+merge(DF2, DF1)
