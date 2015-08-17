@@ -1,0 +1,10 @@
+
+#filtering done in multiple ways
+
+df[!(is.na(df$start_pc) | df$start_pc==""), ]
+df <- df[!(df$start_pc == ""), ]
+df <- df[!is.na(df$start_pc), ]
+df[!(is.na(df$start_pc) | df$start_pc==""), ]
+df <- df[-which(df$start_pc == ""), ]
+df <- df[!(df$start_pc == ""), ]
+df <- df[!is.na(df$start_pc), ]
