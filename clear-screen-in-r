@@ -1,0 +1,9 @@
+
+#clear screen
+
+clr<-function(){
+cat("\014")
+}
+clr()
+
+
