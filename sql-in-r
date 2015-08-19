@@ -1,0 +1,9 @@
+install.packages("sqldf")
+library(sqldf)
+#SQL query sql query
+wow<-sqldf("
+SELECT lefttable.*, righttable.col1
+FROM lefttable
+LEFT OUTER JOIN righttable
+ON lefttable.col_key1 = righttable.col_key2")
+wow
